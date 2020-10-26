@@ -1,0 +1,288 @@
+
+
+#include <iostream>
+#include <cmath>
+
+void task58() {
+	std::cout << "Start of task 58"<<std::endl;
+	int num;
+	int endCheck;
+	std::cout << "Input number and press <Enter>: " << std::endl;
+	std::cin >> num;
+	endCheck = num % 10;
+	if (num % 2 == 0) {
+		std::cout << "Even number" << std::endl;
+
+	}
+	else {
+		std::cout << "Not even number" << std::endl;
+	}
+	if ( endCheck == 7) {
+		std::cout << "Number ends in 7 " << std::endl;
+	}
+	else {
+		std::cout << "Number don`t ends in 7 " << std::endl;
+	}
+	if (endCheck % 2 == 0) {
+		std::cout << "Number ends in even number" << std::endl;
+	}
+	else {
+		std::cout << "Number don`t ends in even number" << std::endl;
+	}
+}
+
+void task69() {
+	std::cout << "Start of task 69"<<std::endl;
+	int num1, num2, a;
+	std::cout << "Input the first digit of a two-digit number and press <Enter>" << std::endl;
+	std::cin >> num1;
+	std::cout << "Input the second digit of a two-digit number and press <Enter>" << std::endl;
+	std::cin >> num2;
+	std::cout << "Your number is : " << num1 << num2 << std::endl;
+	std::cout << "Input a and press <Enter>" << std::endl;
+	std::cin >> a;
+	if ((num1 + num2) % 3 == 0) {
+		std::cout << "Sum  of first  and second digit multiple of: 3" << std::endl;
+
+	}
+	else {
+		std::cout << "Sum  of first  and second digit don`t multiple of: 3" << std::endl;
+	}
+	if ((num1 + num2) % a == 0) {
+		std::cout << "Sum  of first  and second digit multiple of: " << a << std::endl;
+	}
+	else {
+		std::cout << "Sum  of first  and second digit don`t multiple of :" << a << std::endl;
+	}
+}
+void task80() {
+	std::cout << "Start of task 80"<<std::endl;
+	int xa, ya, xb, yb;
+	double OA, OB;
+	std::cout << "Input x coordinate for A and press <Enter> :" << std::endl;
+	std::cin >> xa;
+	std::cout << "Input y coordinate for A and press <Enter> :" << std::endl;
+	std::cin >> ya;
+	std::cout << "Input x coordinate for B and press <Enter> :" << std::endl;
+	std::cin >> xb;
+	std::cout << "Input y coordinate for B and press <Enter> :" << std::endl;
+	std::cin >> yb;
+	OA = sqrt(pow(xa - 0, 2) + pow(ya - 0, 2));
+	OB = sqrt(pow(xb - 0, 2) + pow(yb - 0, 2));
+	if (OA < OB) {
+		std::cout << "Dot A is closer to origin" << std::endl;
+	}
+	else {
+		if (OA > OB) {
+			std::cout << "Dot B is closer to origin" << std::endl;
+		}
+		else {
+			std::cout << "Dots,A and B are equidistant from the origin " << std::endl;
+		}
+	}
+}
+void task91() {
+	std::cout << "Start of task 91"<<std::endl;
+	int Vtruck, Vcar;
+	double Struck, Scar, t, T1, T2;
+	std::cout << "Грузовой автомобиль выехал из \n одного города вдругой со скоростью V1 км/ч. \n Через t ч в этом же направлении выехал легковой автомобиль со скоростью V2 км/ч.\n Составить программу, определяющую, догонит ли легковой автомобиль грузовой \n через t1 ч после своего выезда. " << std::endl;
+	std::cout << "Введите скорость грузовой машины : " << std::endl;
+	std::cin >> Vtruck ;
+	std::cout << "Введите скорость легковой  машины : " << std::endl;
+	std::cin >> Vcar;
+	std::cout << "Введите через сколько часов выехала легковая машина :" << std::endl;
+	std::cin >> T1;
+	std::cout << "Введите время(в часах)через которое вы бы хотели узнать догонит ли машина грузовик :" << std::endl;
+	std::cin >> T2;
+	t = T1 + T2;
+	Struck = t * Vtruck;
+	Scar = ((t - T1) * Vcar);
+	if (Scar > Struck) {
+		std::cout << "Машина догонит грузовик " << std::endl;
+	}
+	else {
+		if (Scar < Struck) {
+			std::cout << "Машина не догонит грузовик " << std::endl;
+		}
+		else {
+			std::cout << "Машина догонит грузовик " << std::endl;
+		}
+	}
+
+}
+void task102() {
+	std::cout << "Start of task 102"<<std::endl;
+	double r, xkv, xpr, ypr, xtr, ytr, ztr, p;
+	double Sr, Skv, Spr, Str, smax;
+	std::cout << "Заданы радиус круга, сторона квадрата,\n две смежные стороны прямоугольника и три стороны треугольника.\n  Определить, какая фигура имеет большую площадь." << std::endl;
+	std::cout << " Введите радиус круга : " << std::endl;
+	std::cin >> r;
+	Sr = 3.14 * pow(r, 2);
+	std::cout << " Введите сторону квадрата : " << std::endl;
+	std::cin >> xkv;
+	Skv = pow(xkv, 2);
+	std::cout << "Введите первую смежную сторону прямоугольника : " << std::endl;
+	std::cin >> xpr;
+	std::cout << "Введите вторую смежную сторону прямоугольника : " << std::endl;
+	std::cin >> ypr;
+	Spr = xpr * ypr;
+	std::cout << "Введите три стороны треугольника после введения одой из сторон треугольника нажмите  <Enter>" << std::endl;
+	std::cin >> xtr >> ytr >> ztr;
+	p = (xtr + ytr + ztr) / 2;
+	Str = sqrt(p * (p - xtr) * (p - ytr) * (p - ztr));
+	double arr[4];
+	arr[0] = Sr;
+	arr[1] = Skv;
+	arr[2] = Spr;
+	arr[3] = Str;
+	smax = arr[0];
+	for (int i = 0; i <= 4; i++) {
+		if (arr[i] < arr[i + 1]) {
+			smax = arr[i + 1];
+		}
+	}
+	if (smax == Sr) {
+		std::cout << "Самая большая площадь у круга " << std::endl;
+	}
+	else {
+		if (smax == Skv) {
+			std::cout << "Самая большая площадь у квадрата " << std::endl;
+		}
+		else {
+			if (smax == Spr) {
+				std::cout << "Самая большая площадь у прямоугольника  " << std::endl;
+			}
+			else {
+				if (smax == Str) {
+					std::cout << "Самая большая площадь у треугольника  " << std::endl;
+				}
+			}
+
+		}
+
+	}
+}
+void task113() {
+	std::cout << "Start of task 113"<<std::endl;
+	double xa, ya, xb, yb, xc, yc,B;
+	std::cout << ". Даны три точки A(x1, y1), B(x2, y2) и С(х3, у3). \n Определить, расположены ли они на одной прямой.\n Если нет, то вычислить угол B." << std::endl;
+	std::cout << "Введите ,для точки А, х координату затем нажмите <Enter> и введите у координату и нажмите <Enter>" << std::endl;
+	std::cin >> xa >> ya;
+	std::cout << "Введите ,для точки B, х координату затем нажмите <Enter> и введите у координату и нажмите <Enter>" << std::endl;
+	std::cin >> xb >> yb;
+	std::cout << "Введите ,для точки C, х координату затем нажмите <Enter> и введите у координату и нажмите <Enter>" << std::endl;
+	std::cin >> xc >> yc;
+	if ((xc - xa) / (xb - xa) == (yc - ya) / (yb - ya)) {
+		std::cout << "Точки A,B,C лежат на одной прямой " << std::endl;
+
+	}
+	else {
+		std::cout << "Точки A,B,C не  лежат на одной прямой " << std::endl;
+		B = cos(((xa - xb) * (xc - xb) + (ya - yb) * (yc - yb)) / sqrt(pow((xa - xb), 2) + pow((ya - yb), 2) * sqrt(pow((xc - xb), 2) + pow((yc - yb), 2))));
+		std::cout << "Угол между точками : " << B << std::endl;
+	}
+
+}
+void task124() {
+	std::cout << "Start of task 124"<<std::endl;
+	int N, M ;
+	int floor = 1;
+	std::cout << "В небоскребе N этажей и всего один подъезд;\n на каждом этаже по 3 квартиры;\n лифт может останавливаться только на нечетных этажах.\n Человек садится в лифт и набирает номер нужной ему квартиры М.\n На какой этаж должен доставить лифт пассажира?" << std::endl;
+	std::cout << "Введите колличество этажей" << std::endl;
+	std::cin >> N;
+	std::cout << "Введите номер квартиры которая вам необходима,максимальное колличество квартир:" <<N*3<< std::endl;
+	std::cin >> M;
+	for (int i = 1; i <= N * 3; i++) {
+		if (i == M) {
+			break;
+		}
+		if (i % 3 == 0) {
+			floor++;
+		}
+	}
+	if (floor % 2 == 0) {
+		std::cout << "Вы выйдете на : " << floor - 1 << " этаже" << std::endl;
+	}
+	else {
+		if (!floor % 2 == 0) {
+			std::cout << "Вы выйдете на : " << floor  << " этаже" << std::endl;
+		}
+	}
+}
+void task135() {
+	std::cout << "Start of task 135"<<std::endl;
+	double a, b, c;
+	std::cout << "Input a:" << std::endl;
+	std::cin >> a;
+	std::cout << "Input b:" << std::endl;
+	std::cin >> b;
+	std::cout << "Input c:" << std::endl;
+	std::cin >> c;
+	if (a < b && b < c) {
+		std::cout << "Complete:a<b<c" << std::endl;
+	}
+	else {
+		std::cout << "Not complete:a<b<c" << std::endl;
+	}
+	if (b > a && a > c) {
+		std::cout << "Complete:b>a>c" << std::endl;
+	}
+	else {
+		std::cout << "Not complete:b>a>c" << std::endl;
+	}
+}
+void task146() {
+	std::cout << "Start of task 146"<<std::endl;
+	int n, a,sum;
+	std::cout << "Введите число квартир:" << std::endl;
+	std::cin >> n;
+	std::cout << "Введите номер первой квартиры :" << std::endl;
+	std::cin >> a;
+	sum = 0;
+	for (int i = a;i <= n; i++) {
+		if (i == n) {
+			sum += i ;
+			break;
+		}
+		sum +=  i + (i + 1);
+		
+	}
+	std::cout <<"Сумма всех квартир: "<< sum<<std::endl;
+}
+void task157() {
+	std::cout << "Start of task 157"<<std::endl;
+	double a1, a2, b1, b2, c1, c2,B;
+	std::cout << "Написать программу, определяющую,\n перпендикулярны ли прямые A1x + B1y + C1 = 0 \n и А2x + B2y + C2 = 0. Если нет,\n то найти угол между ними." << std::endl;
+	std::cout << "Введите а для первой прямой : " << std::endl;
+	std::cin >> a1;
+	std::cout << "Введите b для первой прямой : " << std::endl;
+	std::cin >> b1;
+	std::cout << "Введите а для второй прямой : " << std::endl;
+	std::cin >> a2;
+	std::cout << "Введите b для второй прямой : " << std::endl;
+	std::cin >> b2;
+	if (a1* a2 + b1 * b2 == 0) {
+		std::cout << "Прямые перпендикулярны" << std::endl;
+
+	}
+	else {
+		std::cout << "Прямые не перпендикулярны " << std::endl;
+		B = cos(a1 * a2 + b1 * b2 / sqrt(pow(a1, 2) + pow(b1, 2)) * sqrt(pow(a2, 2) + pow(b2, 2)));
+		std::cout << "Угол между прямыми :" << B << std::endl;
+	}
+}
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	task58();
+	task69();
+	task80();
+	task91();
+	task102();
+	task113();
+	task124();
+	task135();
+	task146();
+	task157();
+}
+
