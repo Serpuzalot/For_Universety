@@ -1,0 +1,305 @@
+#include <iostream>
+#include <cmath>
+void task2() {
+    int num;
+    std::cout << "Для заданного числа найти все его делители." << std::endl;
+    std::cout << "Введите число :" << std::endl;
+    std::cin >> num;
+    for (int i = 1; i <= num; i++) {
+        if (num % i == 0) {
+            std::cout << num << "-Данное число делится на : " << i << std::endl;
+        }
+    }
+}
+void task37() {
+    int n;
+    double p=1;
+    std::cout << "Дано натуральное число n. \nВычислить P=(1-1/2)*(1-1/4)*(1-1/6)*...(1-1/2n)" << std::endl;
+    std::cout << "Введите n: " << std::endl;
+    std::cin >> n;
+    std::cout << "P=";
+    for (int i = 2; i <= 2 * n; i+=2) {
+        p = p * (1.0 - 1.0 / i);
+        if (i == 2*n) {
+            std::cout << "(1-1/" << i << ")";
+        }
+        else {
+            std::cout << "(1-1/" << i << ")*";
+        }
+    }
+    std::cout << std::endl;
+    std::cout <<"P="<<p<<std::endl;
+}
+void task70() {
+    std::cout << "Start of task 70: " << std::endl;
+    std::cout << "В некотором году (назовем его условно первым) на участке в 100 гектаров \n средняя урожайность ячменя составила 20 центнеров с гектара.\n  После этого каждый год площадь участка увеличивалась на 5 %,\n а средняя урожайность — на 2 %.\n Определить:" << std::endl;
+    std::cout << "а) урожайность за второй, третий, ... , восьмой год;\nб) площадь участка в четвертый, пятый,..., седьмой год;\nв) общий урожай за первые шесть лет; \nг) в каком году урожайность превысит 22 центнера с гектара; \nд) в каком году площадь участка станет больше 120 гектаров; \nе) в каком году общий урожай, собранный за все время, начиная с первого года, превысит 800 центнеров." << std::endl;
+    int profit = 20; //урожайность с 1 гиктара на изночальном участке 
+    int land = 100; //изначальная площадь участка
+    double nextLand = land;
+    double nextProfit = profit;
+    double benefit = 0; //урожайность со всего участка
+    int year = 2;
+    double landS[5];
+    double benefitSix = land * profit;//ровняеться первому урожаю
+    int j = 0;
+    std::cout << "answer for a: " << std::endl;
+    for (int i = 0; i < 7; i++) {
+        nextLand = ((nextLand / 100) * 5) + nextLand;
+        nextProfit = ((nextProfit / 100) * 2) + nextProfit;
+        benefit = nextLand * nextProfit;
+        if (i < 5) {
+            benefitSix += benefit;//расчет урожайности за первые 6 лет для задания с
+        }
+        std::cout.precision(15);
+        std::cout << "Урожайность за " << year << " год" << " : " << benefit << std::endl;
+        if (year >= 4) {
+            landS[j] = nextLand;
+            j++;
+        }
+        year++;
+    }
+    std::cout << "answer for б :" << std::endl;
+    year = 4;
+    for (int i = 0; i < 4; i++) {
+        std::cout << "Общая площадь участка за " << year << " год : " << landS[i] << std::endl;
+        year++;
+    }
+    std::cout << "answer for в :" << std::endl;
+    std::cout << "Урожайность за первые 6 лет равна :" << benefitSix << std::endl;
+    std::cout << "answer for г :" << std::endl;
+    nextLand = land;
+    nextProfit = profit;
+    year = 2;
+    while (nextProfit <= 22) {
+        nextLand = ((nextLand / 100) * 5) + nextLand;
+        nextProfit = ((nextProfit / 100) * 2) + nextProfit;
+        year++;
+    }
+    std::cout << "В " << year << " году урожайность достигнет 22 центнеров с гектара" << std::endl;
+    std::cout << "answer for д :" << std::endl;
+    nextLand = land;
+    nextProfit = profit;
+    year = 2;
+    while (nextLand <= 120) {
+        nextLand = ((nextLand / 100) * 5) + nextLand;
+        nextProfit = ((nextProfit / 100) * 2) + nextProfit;
+        year++;
+    }
+    std::cout << "В " << year << " году площадь участка привысит 120 гектар " << std::endl;
+    std::cout << "answer for e :" << std::endl;
+    nextLand = land;
+    nextProfit = profit;
+    benefit = 0;
+    benefitSix = land * profit;
+    if (benefitSix >= 800) {
+        year = 1;
+        std::cout << "В " << year << " году общий урожай привысит 800 центнеров " << std::endl;
+    }
+    else {
+        year = 1;
+        while (benefit < 800) {
+            nextLand = ((nextLand / 100) * 5) + nextLand;
+            nextProfit = ((nextProfit / 100) * 2) + nextProfit;
+            benefit = nextLand * nextProfit;
+            year++;
+        }
+        std::cout << "В " << year << " году общий урожай привысит 800 центнеров " << std::endl;
+    }
+    std::cout << "End of task 70" << std::endl;
+}
+void task105() {
+    std::cout << "Start of task 105 " << std::endl;
+    std::cout << "Имеется серия измерений элементов треугольника. Группы элементов пронумерованы.\nВ серии в произвольном порядке могут встречаться такие группы элементов треугольника:\nоснование и высота (первая группа),\nдве стороны и угол между ними,\nзаданный в радианах (вторая группа),\nтри стороны (третья группа). \nРазработать программу, которая запрашивает номер группы элементов, \nзапрашивает ввод соответствующих элементов и вычисляет площадь треугольника. \nВычисления прекратить, если в качестве номера группы введена цифра 0." << std::endl;
+    int num;
+    double a,b,c,h,alpha,alphagr,perimetr;
+    double s;
+    std::cout << "Enter your group and press <Enter>" << std::endl;
+    std::cin >> num;
+    while (num < 1 || num>3) {
+        std::cin.clear();
+        std::cout << "Enter your group and press <Enter>" << std::endl;
+        std::cin >> num;
+    }
+    switch (num) {
+    case 1:
+        std::cout << "Введите длину основания трегуольника и нажмите <Enter>" << std::endl;
+        std::cin >> a;
+        std::cout << "Введите длину высоты трегуольника и нажмите <Enter>" << std::endl;
+        std::cin >> h;
+        while (a <= 0 || h <= 0) {
+            std::cout << "Input error"<<std::endl;
+            std::cout << "Введите длину основания трегуольника и нажмите <Enter>" << std::endl;
+            std::cin >> a;
+            std::cout << "Введите длину высоты трегуольника и нажмите <Enter>" << std::endl;
+            std::cin >> h;
+        }
+        s = 0.5 * a * h;
+        std::cout << "Площадь треугольника равна: " << s << std::endl;
+        break;
+    case 2:
+        std::cout << "Введите длину первой стороны трегуольника и нажмите <Enter>" << std::endl;
+        std::cin >> a;
+        std::cout << "Введите длину второй стороны трегуольника и нажмите <Enter>" << std::endl;
+        std::cin >> b;
+        std::cout << "Введите угол(в радианах) между двумя сторонами трегуольника и нажмите <Enter>" << std::endl;
+        std::cin >> alpha;
+        while (a <= 0 || b <= 0 || alpha <= 0 || alpha >= 3.14) { //3,14159 - 180 градусов в радианах
+            std::cout << "Input error" << std::endl;
+            std::cout << "Введите длину первой стороны трегуольника и нажмите <Enter>" << std::endl;
+            std::cin >> a;
+            std::cout << "Введите длину второй стороны трегуольника и нажмите <Enter>" << std::endl;
+            std::cin >> b;
+            std::cout << "Введите угол(в радианах) между двумя сторонами трегуольника и нажмите <Enter>" << std::endl;
+            std::cin >> alpha;
+        }
+        alphagr = alpha * 180 / 3.14;
+        s = 0.5 * a * b * sin(alphagr);
+        std::cout << "Площадь треугольника равна: " << s << std::endl;
+        break;
+    case 3:
+        std::cout << "Введите длину первой стороны трегуольника и нажмите <Enter>" << std::endl;
+        std::cin >> a;
+        std::cout << "Введите длину второй стороны трегуольника и нажмите <Enter>" << std::endl;
+        std::cin >> b;
+        std::cout << "Введите длину третьей стороны трегуольника и нажмите <Enter>" << std::endl;
+        std::cin >> c;
+        while (a <= 0 || b <= 0 || c <= 0) {
+            std::cout << "Input error"<<std::endl;
+            std::cout << "Введите длину первой стороны трегуольника и нажмите <Enter>" << std::endl;
+            std::cin >> a;
+            std::cout << "Введите длину второй стороны трегуольника и нажмите <Enter>" << std::endl;
+            std::cin >> b;
+            std::cout << "Введите длину третьей стороны трегуольника и нажмите <Enter>" << std::endl;
+            std::cin >> c;
+        }
+        perimetr = a + b + c;
+        s = sqrt(perimetr / 2 * (perimetr / 2 - a) * (perimetr / 2 - b) * (perimetr / 2 - c));
+        std::cout << "Площадь треугольника равна: " << s << std::endl;
+        break;
+    }
+    std::cout << "End of task 105" << std::endl;
+}
+void task140() {
+    int sumsquers;
+    std::cout << "Start of task 140 " << std::endl;
+    std::cout << "Определите все двузначные числа,\nсумма квадратов цифр которых кратна числу 15" << std::endl;
+    for (int i = 10; i <= 100; i++) {
+        sumsquers = (i * i) + (i * i);
+        if (sumsquers % 15 == 0) {
+            std::cout << i << " - сумма квадратов данного числа кратна 15-ти" << std::endl;
+        }
+    }
+    std::cout << "End of task 140" << std::endl;
+}
+void task175() {
+    std::cout << "Start of task 175" << std::endl;
+    std::cout << "Дана непустая последовательность положительных целых чисел а1, а2, ..., оканчивающаяся нулем. \nПолучить последовательность вида а1, а1*а2, а1*а2*а3, ..., 0." << std::endl;
+    double rezult=1;
+    double temp=1;
+    std::cout << "Введите последовательность  чисел заканчивающуюся нулем" << std::endl;
+    while (temp != 0) {
+        
+        std::cin >> temp;
+        if (temp == 0) {
+            break;
+        }
+        rezult = rezult * temp;
+    }
+    std::cout << rezult;
+    std::cout << "End of task 175" << std::endl;
+}
+void task245() {
+    std::cout << "Start of task 245" << std::endl;
+    std::cout << "Составить программу для вычисления значений функции   на отрезке   с шагом  . \nРезультат представить в виде таблицы, первый столбец которой — значения аргумента, \nвторой — соответствующие значения функции." << std::endl;
+    double a, b, h,f;
+    std::cout << "Введите через пробел границы графика:" << std::endl;
+    std::cin >> a >> b;
+    double x = a;
+    std::cout << "Введите шаг:" << std::endl;
+    std::cin >> h; 
+    std::cout << "X" <<"    "<< "F" << std::endl;
+    for (int i = a; i <= b; i+=h) {
+        f = 7 * pow(sin(x), 2) - 0.5 * cos(x);
+        std::cout << x << "    " << f << std::endl;
+        x += h;
+    }
+    std::cout << "End of task 245 " << std::endl;
+}
+void task280() {
+    std::cout << "Start of task 280:" << std::endl;
+    std::cout << "Составить программу, которая ведет учет очков, набранных каждой командой при игре в баскетбол. \nЗа попадание в корзину дается 1, 2 или 3 очка. \nПосле любого изменения счет выводить на экран. \nПосле окончания игры выдать итоговое сообщение и указать номер команды-победительницы. \nОкончание игры условно моделировать вводом количества очков, равного нулю." << std::endl;
+    int scoreTeamA=0, scoreTeamB=0;
+    int temp=1,score;
+    while (temp != 0) {
+        std::cout << "Введите команду которая забила (1 или 2)" << std::endl;
+        std::cin >> temp;
+        if (temp == 0) {
+            break;
+        }
+        while (temp < 1 || temp>2) {
+            std::cout << "Input error" << std::endl;
+            std::cout << "Введите команду которая забила (1 или 2)" << std::endl;
+            std::cin >> temp;
+        }
+        if (temp == 1) {
+            std::cout << "Введите колличество забыитых первой командой очков :" << std::endl;
+            std::cin >> score;
+            while (score < 1 || score>3) {
+                std::cout << "Input error" << std::endl;
+                std::cout << "Введите колличество забыитых первой командой очков :" << std::endl;
+                std::cin >> score;
+            }
+            scoreTeamA += score;
+            score = 0;
+        }
+        else {
+            std::cout << "Введите колличество забыитых второй командой очков:" << std::endl;
+            std::cin >> score;
+            while (score < 1 || score>3) {
+                std::cout << "Input error" << std::endl;
+                std::cout << "Введите колличество забыитых первой командой очков :" << std::endl;
+                std::cin >> score;
+            }
+            scoreTeamB += score;
+            score = 0;
+        }
+    }
+    std::cout << "Счет первой команды: " << scoreTeamA << std::endl << "Счет второй команды: " << scoreTeamB << std::endl;
+    if (scoreTeamA > scoreTeamB) {
+        std::cout << "Первая команда победила в матче!!!" << std::endl;
+    }
+    else {
+        if (scoreTeamA < scoreTeamB) {
+            std::cout << "Вторая команда победила в матче!!!" << std::endl;
+        }
+        else {
+            std::cout << "Ничья!" << std::endl;
+        }
+        
+    }
+    std::cout << "End of task 280" << std::endl;
+}
+void task315() {
+    int num;
+    int arr[100000];
+    std::cout << "Start of task 315: " << std::endl;
+    std::cout << "Дано натуральное число. Определить, \nсколько раз в нем встречается минимальная цифра \n(например, для числа 102 200 ответ равен 3, \nдля числа 40 330 — 2, для числа 10 345 — 1)." << std::endl;
+    std::cout << "Введите натуральное число" << std::endl;
+    std::cin >> num;
+
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    //task2();
+    //task37();
+    //task70();
+    //task105();
+    //task140();
+    //task175();
+    //task245();
+    //task280();
+    
+}
