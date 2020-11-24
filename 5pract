@@ -280,15 +280,85 @@ void task280() {
     }
     std::cout << "End of task 280" << std::endl;
 }
-void task315() {
-    int num;
-    int arr[100000];
-    std::cout << "Start of task 315: " << std::endl;
-    std::cout << "Дано натуральное число. Определить, \nсколько раз в нем встречается минимальная цифра \n(например, для числа 102 200 ответ равен 3, \nдля числа 40 330 — 2, для числа 10 345 — 1)." << std::endl;
-    std::cout << "Введите натуральное число" << std::endl;
-    std::cin >> num;
-
+// доп задание :
+void task283() {
+    std::cout << "Start of task 283" << std::endl;
+    double z,a=0,b=0,temp,composition=1;
+    int i=1;
+    while (i <= 15) {
+        std::cout << "Enter a" << i <<":"<< std::endl;
+        std::cin >> temp;
+        if (i <= 10) {
+            composition = composition * ((temp + b) / 2.0);
+            b += 0.1;
+        }
+        a =a+temp;
+       
+        i++;
+    }
+    z = a * composition;
+    std::cout <<"Z= " << z << std::endl;
+    std::cout << "End of task 283" << std::endl;
+    }
+void task318() {
+    std::cout << "Start of task 318" << std::endl;
+    std::cout << "Найти 20 первых натуральных чисел, делящихся нацело на 13 или на 17 и больших 500." << std::endl;
+    int temp=500;
+    int i=1;
+    while (i <= 20) {
+        temp++;
+        if (temp % 13 == 0 ) {
+            std::cout <<i<< ".Данное число " << temp << " делится на 13 "<<std:: endl;
+            i++;
+        }
+        else {
+            if (temp % 17 == 0) {
+                std::cout << i<<".Данное число " << temp << " делится на 17 " << std:: endl;
+                i++;
+            }
+        }
+    }
 }
+void task351() {
+    std::cout << "Start of task 351" << std::endl;
+    std::cout << "Дано натуральное число n. Получить все натуральные числа, меньшие n и взаимно простые с ним (два натуральных числа называются взаимно простыми, если их наибольший общий делитель равен 1)." << std::endl;
+    int n,counter=1;
+    std::cout << "Enter natural number:" << std::endl;
+    std::cin >> n;
+    while (n <= 0) {
+        std::cout << "Input error" << std::endl;
+        std::cout << "Enter natural number:" << std::endl;
+        std::cin >> n;
+    }
+    
+    if (n % 2 != 0 && n % 3 != 0 && n % 5 != 0) {
+        std::cout << n << "-простое число " << std::endl;
+
+    }
+    else {
+        if (n == 2 || n == 3 || n == 5) {
+            std::cout << n << "-простое число " << std::endl;
+        }
+        else {
+            std::cout << n << "-не простое число " << std::endl;
+        }
+      
+    }
+    while (counter <= n) {
+        if (counter % 2 != 0 && counter % 3 != 0 && counter % 5 != 0) {
+            std::cout << counter << "-простое число и оно меньше  " <<n<< std::endl;
+        }
+        else {
+            if (counter == 2 || counter == 3 || counter == 5) {
+                std::cout << counter << "-простое число и оно меньше  " << n << std::endl;
+                
+            }
+        }
+        counter++;
+    }
+    std::cout << "End of task 351" << std::endl;
+}
+
 
 int main()
 {
@@ -301,5 +371,10 @@ int main()
     //task175();
     //task245();
     //task280();
+    //доп:
+    //task283();
+    //task318();
+    task351();
+
     
 }
