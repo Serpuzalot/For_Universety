@@ -1,0 +1,178 @@
+#include <stdlib.h>
+#include <time.h>
+#include <iostream>
+#include <cmath>
+void task2() {
+	std::cout << "Start of task 2" << std::endl;
+	std::cout << "Заполнить массив из десяти элементов значениями, вводимыми с клавиатуры в ходе выполнения программы." << std::endl;
+	const int N = 10;
+	double arr[N];
+	for (int i = 1; i < N+1; i++) {
+		std::cout << "Input " << i << " number" << std::endl;
+		std::cin >> arr[i - 1];
+	}for (int i = 0; i < N; i++) {
+		std::cout << "Your array: "<<arr[i]<< std::endl;
+	}
+	std::cout << "end of task 2"<<std::endl;
+}
+void task37() {
+	std::cout << "Start of task 37" << std::endl;
+	std::cout << "Даны натуральные числа а1, а2, ..., an. Указать те из них, у кот. остаток от деления на М равен L (0 <= L <= M – 1)." << std::endl;
+	int m,n,temp,counter=0;
+	std::cout << "Введите каким натуральным числом должна заканчиваться последовательность (посследовательность начинается с 1):" << std::endl;
+	std::cin >> n;
+	std::cout << "Введите число M:" << std::endl;
+	std::cin >> m;
+	for(int i =1;i<=n;i++){
+		temp = i % m;
+		if (temp >= 0 && temp <= m - 1) {
+			std::cout << "Это число подходит условию:" << i << std::endl;
+			counter++;
+		}
+	}
+	if (counter == 0) {
+		std::cout << "Нет чисел,которые удовлетворяют условие на данном промежутке " << std::endl;
+	}
+	std::cout << "end of task 37" << std::endl;
+}
+void task72() {
+	std::cout << "Start of task 72" << std::endl; 
+	std::cout << "Найти произведение элементов массива вещественных чисел, которые больше первого, \nно меньше 4-го элемента массива (если таких элементов нет, \nвыдать сообщение об отсутствии таких элементов)." << std::endl;
+	const int N = 10;
+	double arr[N];
+	double rez=1;
+	for (int i = 0; i < N; i++) {
+		arr[i] = 0.01 * rand();
+		std::cout <<i+1<<": "<<arr[i]<<std::endl;
+	}
+	for (int i = 0; i < N; i++) {
+		if (i >= 1) {
+			if (arr[i] > arr[0] && arr[i] < arr[3]) {
+				rez =rez* arr[i];
+			}
+		}
+	}
+	if (rez == 1) {
+		std::cout << "Таких чисел нету в данной ситуации " << std::endl;
+	}
+	else {
+		std::cout << "Ответ: " << rez << std::endl;
+	}
+	std::cout << "end of task 72" << std::endl;
+}
+void task107() {
+	std::cout << "start of task 107" << std::endl;
+	std::cout << "На 10-е место одномерного массива целых чисел вставить заданное число." << std::endl;
+	const int N = 20, K = 1;
+	int num,temp;
+	int arr[N + K];
+	for (int i = 0; i < N; i++) {
+		arr[i] = rand() %200-100 ;//рандомное число в диапозоне от-100 до 100
+		std::cout << i + 1 << ": " << arr[i] << std::endl;
+	}
+	std::cout << "Введите число которое хотите вставить в 10-ую ячейку: " << std::endl;
+	std::cin >> num;
+	for (int i = N + K; i >= 0; i--) {
+		temp = arr[i - 1];
+		arr[i] = temp;
+		if (i == 9) {
+			arr[i] = num;
+			break;
+		}
+		
+	}
+	for (int i = 0; i < N + K; i++) {
+		std::cout << i + 1 << ": " << arr[i] << std::endl;
+	}
+	std::cout << "end of task 107" << std::endl;
+}
+void task141() {
+	std::cout << "Start of task 141" << std::endl;
+	std::cout << "Даны две последовательности целых чисел а1, а2, ..., an и b1, b2, ..., bn. \nПреобразовать последовательность b1, b2, ..., bn \nпо следующему правилу: если аi <= 0, то bi увеличить в 10 раз, \nв противном случае bi заменить нулем (i = 1, 2, ..., n)." << std::endl;
+	const int N = 20;
+	int arrA[N];
+	int arrB[N];
+	std::cout << "   a" << "	" << "b" << std::endl;
+	for (int i = 0; i < N; i++) {
+		arrA[i] = rand() % 20 - 10;
+		arrB[i] = rand() % 20 - 10;
+		std::cout << i + 1 << ": " << arrA[i] << "	" << arrB[i] << std::endl;
+		if (arrA[i] <= 0) {
+			arrB[i] *= 10;
+		}
+		else {
+			arrB[i] = 0;
+		}
+	}
+	std::cout << "//////////" << std::endl;
+	std::cout << "   a" << "	" << "b" << std::endl;
+	for (int i = 0; i < N; i++) {
+		std::cout << i + 1 << ": " << arrA[i] << "	" << arrB[i] << std::endl;
+	}
+	std::cout << "end of task 141" << std::endl;
+}
+void task177() {
+	std::cout << "Start of task 177" << std::endl;
+	std::cout << "На плоскости заданы n точек своими координатами х и у. \nНаписать программу определения расстояния между наиболее удаленными друг от друга точками \nи расстояния между наименее удаленными точками." << std::endl;
+	int const N = 5, K = 2;
+	int arr[N][K];
+	double distance[N * K];
+	double maxDist, minDist;
+	std::cout << "X" << "	" << "Y" << std::endl;
+	for (int i = 0; i < N; i++) {
+
+		for (int j = 0; j < 2; j++) {
+			arr[i][j] = rand() % 20 - 10;
+			std::cout << arr[i][j] << "	";
+
+		}
+		std::cout << std::endl;
+	}
+	for (int i = 0; i < N; i++) {
+		int temp1 = arr[i][0];
+		int temp2 = arr[i][1];
+		distance[i] = sqrt(pow(temp1 - 0, 2) + pow(temp2 - 0, 2));//расстояние от точки до начала координат
+		std::cout << distance[i] << std::endl;
+	}
+	maxDist = distance[0];
+	minDist = distance[0];
+	double minDistpp = distance[0];
+	int maxCounter = 0, minCounter = 0, minCountpp = 0;
+	double rez1;
+	for (int i = 0; i < N; i++) {
+		if (distance[i] > maxDist) {
+			maxDist = distance[i];
+			maxCounter = i;
+		}
+		if (distance[i] < minDist) {
+			minDist = distance[i];
+			minCounter = i;
+		}
+	}
+	std::cout << "max:" << maxCounter << std::endl;
+	std::cout << "min:" << minCounter << std::endl;
+	rez1 = sqrt(pow(arr[maxCounter][0] - arr[minCounter][0], 2) + pow(arr[maxCounter][1] - arr[minCounter][1], 2));
+	std::cout << "Расстояние между самыми дальними точками : " << rez1 << std::endl;
+	for (int i = 0; i < N; i++) {
+		if (i != minCounter) {
+			if (distance[i] < minDistpp) {
+				minDistpp = distance[i];
+				minCountpp = i;
+			}
+		}
+	}
+	double rez2= sqrt(pow(arr[minCounter][0] - arr[minCountpp][0], 2) + pow(arr[minCounter][1] - arr[minCountpp][1], 2));
+	std::cout << "Расстояние между наимболее близкими  точками : " << rez2 << std::endl;
+}
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	srand(time(NULL));
+	//task2();
+	//task37();
+	//task72();
+	//task107();
+	//task141();
+	//task177();
+}
+
