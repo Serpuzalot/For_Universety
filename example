@@ -1,0 +1,78 @@
+#include <stdlib.h>
+#include <time.h>
+#include <cmath>
+#include <iostream>
+
+int main()
+{
+    srand(time(NULL));
+    const int N = 15, K = 2;
+    double dotsArray[N][K];//координаты х у
+    int overScope=0,inScope=0;// вне окр или внутри окр точка
+    double r,temp; //радиус и просто перменная 
+    std::cout << "Input R: " << std::endl;
+    std::cin >> r;
+    std::cout  << " X" << "     " << "      Y" << std::endl;
+    for (int i = 0; i < N; i++) {//заполнение двумерного массива координатами х у
+
+        for (int j = 0; j < K; j++) {
+            dotsArray[i][j]=rand()%60-30;//случайные числа в диапазоне от -30 до 30
+            std::cout << dotsArray[i][j]<<"           ";
+        }
+        std::cout << std::endl;
+    }
+    for (int i = 0; i < N; i++) {//определение сколько точек лежит в не окр и в нутри окр
+        temp = sqrt((dotsArray[i][0]* dotsArray[i][0]) + (dotsArray[i][1] * dotsArray[i][1]));
+        if (temp <= r) {
+            inScope++;
+        }
+        else {
+            overScope++;
+        }
+    }
+    std::cout << "dots over:" << overScope << std::endl;
+    std::cout << "dots in" << inScope << std::endl;
+    //тут начинается жопа
+    //через формулу для нахлждения  расстояния между прямой и точкой(в данном случае начало координат) вся эта муть рабоатет 
+    double tempX1 = 0, tempX2 = 0, tempX3 = 0;
+    double tempY1 = 0, tempY2 = 0, tempY3 = 0;
+    double c1 = 1, c2 = 1, c3 = 1,d1,d2,d3;
+    for (int i = 0; i < N; i+=3) {
+            tempX1 = dotsArray[i + 1][0] - dotsArray[i][0];//рассчет коэффициента А в уравнении прямой
+            tempY1 = dotsArray[i + 1][1] - dotsArray[i][1];//рассчет коэффициента B в уравнении прямой
+            c1 = tempX1 * dotsArray[i][0] - tempY1 * dotsArray[i][1];//рассчет коэффициента C в уравнении прямой
+            d1 = (tempX1 * 0 + tempY1*0 + c1) / (sqrt(tempX1 * tempX1 + tempY1 * tempY1));//рассчет расстояния от прямой то начала координат
+            tempX2 = dotsArray[i + 2][0] - dotsArray[i][0];//тут тоже самое что сверху но еще для одной прямой
+            tempY2 = dotsArray[i + 2][1] - dotsArray[i][1];
+            c2 = tempX2 * dotsArray[i][0] - tempY2 * dotsArray[i][1];
+            d2 = (tempX2 * 0 + tempY2*0 + c2) / (sqrt(tempX2 * tempX2 + tempY2 * tempY2));
+            tempX3 = dotsArray[i + 2][0] - dotsArray[i+1][0];//та же история и в итоге мы получим три прямые и это треугольник 
+            tempY3 = dotsArray[i + 2][1] - dotsArray[i+1][1];
+            c3 = tempX3 * dotsArray[i+2][0] - tempY3 * dotsArray[i+2][1];
+            d3 = (tempX3 * 0 + tempY3* 0 + c3) / (sqrt(tempX3 * tempX3 + tempY3 * tempY3));
+            if (d1 < 0) {//убираем у расстояния знак минус(бо расстояние не может быть отрицательным
+                d1 = d1 * (-1);
+            }
+            if (d2 < 0) {
+                d2 = d2 * (-1);
+            }
+            if (d3 < 0) {
+                d3 = d3 * (-1);
+            }
+            if (d1 < r && d2 < r && d3 < r) {//если расстояние от прямой до начала координа меньше чем радиус значит точка внутри окр
+                std::cout << "Tringle with dots (" << dotsArray[i][0] << ";" << dotsArray[i][1]<<")"<< "(" << dotsArray[i+1][0] << "; " << dotsArray[i+1][1]<<")"<< "(" << dotsArray[i + 2][0] << "; " << dotsArray[i + 2][1] << ")" <<"in circle" << std::endl;
+            }
+            else {
+                if (d1==r||d2==r||d3==r) {//ессли расстояние равно радиусу значит есть только 1 точка соприкосновения
+                    std::cout << "Tringle with dots (" << dotsArray[i][0] << ";" << dotsArray[i][1] << ")" << "(" << dotsArray[i + 1][0] << "; " << dotsArray[i + 1][1] << ")" << "(" << dotsArray[i + 2][0] << "; " << dotsArray[i + 2][1] << ")" << "have 1 point with circle" << std::endl;
+                }
+                else {//в иных случаях треугольник лежит за пределами окр
+                    std::cout << "Tringle with dots (" << dotsArray[i][0] << ";" << dotsArray[i][1] << ")"<<  "(" << dotsArray[i + 1][0] << "; " << dotsArray[i + 1][1] << ")" << "(" << dotsArray[i + 2][0] << "; " << dotsArray[i + 2][1] << ")" <<" over the circle" << std::endl;
+                }
+            }
+        
+       
+    }
+
+}
+
