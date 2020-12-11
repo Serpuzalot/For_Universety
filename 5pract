@@ -1,4 +1,6 @@
+
 #include <iostream>
+
 #include <cmath>
 void task2() {
     int num;
@@ -40,71 +42,60 @@ void task70() {
     double nextProfit = profit;
     double benefit = 0; //урожайность со всего участка
     int year = 2;
-    double landS[5];
     double benefitSix = land * profit;//ровняеться первому урожаю
-    int j = 0;
     std::cout << "answer for a: " << std::endl;
     for (int i = 0; i < 7; i++) {
         nextLand = ((nextLand / 100) * 5) + nextLand;
         nextProfit = ((nextProfit / 100) * 2) + nextProfit;
         benefit = nextLand * nextProfit;
-        if (i < 5) {
+        if  (i < 5){
             benefitSix += benefit;//расчет урожайности за первые 6 лет для задания с
         }
-        std::cout.precision(15);
         std::cout << "Урожайность за " << year << " год" << " : " << benefit << std::endl;
-        if (year >= 4) {
-            landS[j] = nextLand;
-            j++;
+        if (year >= 4 && i<6) {
+            std::cout << "Общая площадь участка за " << year << " год : " << nextLand << std::endl;
         }
-        year++;
-    }
-    std::cout << "answer for б :" << std::endl;
-    year = 4;
-    for (int i = 0; i < 4; i++) {
-        std::cout << "Общая площадь участка за " << year << " год : " << landS[i] << std::endl;
         year++;
     }
     std::cout << "answer for в :" << std::endl;
     std::cout << "Урожайность за первые 6 лет равна :" << benefitSix << std::endl;
-    std::cout << "answer for г :" << std::endl;
+    //std::cout << "answer for г :" << std::endl;
     nextLand = land;
     nextProfit = profit;
     year = 2;
-    while (nextProfit <= 22) {
+    int z = 0;
+    int i = 0 ;
+    int j = 0;
+    int s = 0;
+    while (z<=2) {
         nextLand = ((nextLand / 100) * 5) + nextLand;
         nextProfit = ((nextProfit / 100) * 2) + nextProfit;
-        year++;
-    }
-    std::cout << "В " << year << " году урожайность достигнет 22 центнеров с гектара" << std::endl;
-    std::cout << "answer for д :" << std::endl;
-    nextLand = land;
-    nextProfit = profit;
-    year = 2;
-    while (nextLand <= 120) {
-        nextLand = ((nextLand / 100) * 5) + nextLand;
-        nextProfit = ((nextProfit / 100) * 2) + nextProfit;
-        year++;
-    }
-    std::cout << "В " << year << " году площадь участка привысит 120 гектар " << std::endl;
-    std::cout << "answer for e :" << std::endl;
-    nextLand = land;
-    nextProfit = profit;
-    benefit = 0;
-    benefitSix = land * profit;
-    if (benefitSix >= 800) {
-        year = 1;
-        std::cout << "В " << year << " году общий урожай привысит 800 центнеров " << std::endl;
-    }
-    else {
-        year = 1;
-        while (benefit < 800) {
-            nextLand = ((nextLand / 100) * 5) + nextLand;
-            nextProfit = ((nextProfit / 100) * 2) + nextProfit;
-            benefit = nextLand * nextProfit;
-            year++;
+        benefit = nextLand * nextProfit;
+        if (nextProfit >= 22) {
+            if (i <1) {
+                std::cout << "answer for г :" << std::endl;
+                std::cout << "В " << year << " году урожайность достигнет 22 центнеров с гектара" << std::endl;
+                i = 1;
+            }
+           
         }
-        std::cout << "В " << year << " году общий урожай привысит 800 центнеров " << std::endl;
+        if (nextLand >= 120) {
+            if (j < 1) {
+                std::cout << "answer for д :" << std::endl;
+                std::cout << "В " << year << " году площадь участка привысит 120 гектар " << std::endl;
+                j = 1;
+            }
+                
+        }
+        if (benefit >= 800) {
+            if (s < 1) {
+                std::cout << "answer for e :" << std::endl;
+                std::cout << "В " << year-1 << " году общий урожай привысит 800 центнеров " << std::endl;
+                s = 1;
+            }
+        }
+        z = i + j+s;
+        year++;
     }
     std::cout << "End of task 70" << std::endl;
 }
@@ -153,7 +144,8 @@ void task105() {
             std::cout << "Введите угол(в радианах) между двумя сторонами трегуольника и нажмите <Enter>" << std::endl;
             std::cin >> alpha;
         }
-        alphagr = alpha * 180 / 3.14;
+          
+        alphagr = alpha * 180 / 3.14159265358979323846264;
         s = 0.5 * a * b * sin(alphagr);
         std::cout << "Площадь треугольника равна: " << s << std::endl;
         break;
@@ -181,13 +173,14 @@ void task105() {
     std::cout << "End of task 105" << std::endl;
 }
 void task140() {
-    int sumsquers;
     std::cout << "Start of task 140 " << std::endl;
     std::cout << "Определите все двузначные числа,\nсумма квадратов цифр которых кратна числу 15" << std::endl;
     for (int i = 10; i <= 100; i++) {
-        sumsquers = (i * i) + (i * i);
-        if (sumsquers % 15 == 0) {
-            std::cout << i << " - сумма квадратов данного числа кратна 15-ти" << std::endl;
+
+        for (int j = 10; j <= 100; j++) {
+            if ((i * i + j * j) % 15 == 0) {
+                std::cout << i <<" and " << j <<" суммма квадратов этих чисел кратна 15 " << std::endl;
+            }
         }
     }
     std::cout << "End of task 140" << std::endl;
@@ -242,7 +235,22 @@ void task280() {
             std::cout << "Введите команду которая забила (1 или 2)" << std::endl;
             std::cin >> temp;
         }
+        std::cout << "Введите колличество забыитых "<<temp <<"-ой командой очков :" << std::endl;
+        std::cin >> score;
+        while (score < 1 || score>3) {
+            std::cout << "Input error" << std::endl;
+            std::cout << "Введите колличество забыитых " << temp << "-ой командой очков :" << std::endl;
+            std::cin >> score;
+        }
         if (temp == 1) {
+            scoreTeamA += score;
+            score = 0;
+        }
+        else {
+            scoreTeamB += score;
+            score = 0;
+        }
+        /*if (temp == 1) {
             std::cout << "Введите колличество забыитых первой командой очков :" << std::endl;
             std::cin >> score;
             while (score < 1 || score>3) {
@@ -263,7 +271,8 @@ void task280() {
             }
             scoreTeamB += score;
             score = 0;
-        }
+        }*/
+
     }
     std::cout << "Счет первой команды: " << scoreTeamA << std::endl << "Счет второй команды: " << scoreTeamB << std::endl;
     if (scoreTeamA > scoreTeamB) {
@@ -322,7 +331,7 @@ void task318() {
 void task351() {
     std::cout << "Start of task 351" << std::endl;
     std::cout << "Дано натуральное число n. Получить все натуральные числа, меньшие n и взаимно простые с ним (два натуральных числа называются взаимно простыми, если их наибольший общий делитель равен 1)." << std::endl;
-    int n,counter=1;
+    int n,counter=0;
     std::cout << "Enter natural number:" << std::endl;
     std::cin >> n;
     while (n <= 0) {
@@ -330,13 +339,31 @@ void task351() {
         std::cout << "Enter natural number:" << std::endl;
         std::cin >> n;
     }
-    
-    if (n % 2 != 0 && n % 3 != 0 && n % 5 != 0) {
+    std::cout << "1" << " Простое число" << std::endl;
+    for (int i = 2; i < n; i++) {
+   
+        bool prime = true;
+        if (i == 2) {
+            prime = false;
+        }
+        for (int j = 2; j < i; j++) {
+            if (i % j == 0) {
+                prime = false;
+                break;
+               
+            }
+          
+        }
+        if (prime) {
+            std::cout << i << " Простое число" << std::endl;
+        }
+    }
+   /* if (n % 2 != 0 && n % 3 != 0 && n % 5 != 0 && n % 7 != 0)  {
         std::cout << n << "-простое число " << std::endl;
 
     }
     else {
-        if (n == 2 || n == 3 || n == 5) {
+        if (n == 2 || n == 3 || n == 5 || n==7) {
             std::cout << n << "-простое число " << std::endl;
         }
         else {
@@ -355,7 +382,7 @@ void task351() {
             }
         }
         counter++;
-    }
+    }*/
     std::cout << "End of task 351" << std::endl;
 }
 
@@ -365,7 +392,7 @@ int main()
     setlocale(LC_ALL, "Russian");
     //task2();
     //task37();
-    //task70();
+    task70();
     //task105();
     //task140();
     //task175();
@@ -374,7 +401,7 @@ int main()
     //доп:
     //task283();
     //task318();
-    task351();
+    //task351();
 
-    
+    //140 351 280 
 }
