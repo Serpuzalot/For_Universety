@@ -206,13 +206,23 @@ void task245() {
     std::cout << "Start of task 245" << std::endl;
     std::cout << "Составить программу для вычисления значений функции   на отрезке   с шагом  . \nРезультат представить в виде таблицы, первый столбец которой — значения аргумента, \nвторой — соответствующие значения функции." << std::endl;
     double a, b, h,f;
+    double x,tempMin,tempMax;
     std::cout << "Введите через пробел границы графика:" << std::endl;
     std::cin >> a >> b;
-    double x = a;
+    if (a >= b) {
+        x = b;
+        tempMin = b;
+        tempMax = a;
+    }
+    else {
+        x = a;
+        tempMin = a;
+        tempMax = b;
+    }
     std::cout << "Введите шаг:" << std::endl;
     std::cin >> h; 
     std::cout << "X" <<"    "<< "F" << std::endl;
-    for (int i = a; i <= b; i+=h) {
+    for (double i = tempMin; i <= tempMax; i += h) {
         f = 7 * pow(sin(x), 2) - 0.5 * cos(x);
         std::cout << x << "    " << f << std::endl;
         x += h;
@@ -392,11 +402,11 @@ int main()
     setlocale(LC_ALL, "Russian");
     //task2();
     //task37();
-    task70();
+    //task70();
     //task105();
     //task140();
     //task175();
-    //task245();
+    task245();
     //task280();
     //доп:
     //task283();
