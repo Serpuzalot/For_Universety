@@ -1,0 +1,74 @@
+#include <string>
+#include <ctime>
+#include <iostream>
+struct Process {
+     int process_id;
+     std::string process_name;
+     int process_memory;
+     short process_priority;// 1) 1-50kb, 2) 50-100kb , 3)100kb-200kb , 4)200kb-500kb ,5)500kb-700kb ,6)700kb-1000kb
+     std::string process_status;//ready-готов началу,processing-в процессе,wait-ждет повторного начала,finished        
+};
+int priority_distributor(int memory ) {
+    int priority;
+   
+    if (memory < 50) {
+        priority = 1;
+    }
+    else {
+        if (memory >= 50 && memory < 100) {
+            priority = 2;
+        }
+        else {
+            if (memory >= 100 && memory < 200) {
+                priority = 3;
+            }
+            else {
+                if (memory >= 200 && memory < 500) {
+                    priority = 4;
+                }
+                else {
+                    if (memory >= 500 && memory < 700) {
+                        priority = 5;
+                    }
+                    else {
+                        if (memory >= 700 && memory < 1000) {
+                            priority = 6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+     return priority;
+    }
+
+
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    srand((int)time(0));
+    int const total_memory = 4096;
+    Process * proceses = new Process[4096];
+    int f = 0;
+    int memory_temp = 0;
+    for (int i = 0; i < total_memory; i += memory_temp) {
+        proceses[f].process_id = f;
+        int d = rand() % 100;
+        proceses[f].process_name = "Process " + std::to_string(d);
+        proceses[f].process_memory = rand() % 1000==0? rand() % 1000 : rand() % 1000;
+        memory_temp = proceses[f].process_memory;
+        proceses[f].process_status = "ready";
+        f++;
+    }
+    for (int i = 0; i < f; i++) {
+        proceses[i].process_priority = priority_distributor(proceses[i].process_memory);
+    }
+    for (int i = 0; i < f; i++) {
+        std::cout << "Process id: " << proceses[i].process_id<<std::endl;
+        std::cout <<"Process name: "<< proceses[i].process_name << std::endl;
+        std::cout <<"Process memorry: " <<proceses[i].process_memory << std::endl;
+        std::cout << "Process status: " << proceses[i].process_status << std::endl;
+        std::cout << "Process priority: " << proceses[i].process_priority << std::endl;
+    }
+}
